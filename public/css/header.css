@@ -1,0 +1,47 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    outline: none;
+}
+
+ul {
+    list-style: none;
+    font-size: 1.4em;
+    color: white;
+}
+
+ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+ul li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+ul.rigth {
+    position: absolute;
+    right: 20px;
+}
+
+ul.rigth li {
+    margin-right: 10px;
+}
+
+ul.left {
+    float: left;
+}
+
+.navbar {
+    background-color: rgb(146, 146, 240);
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 50px;
+    max-width: 100%;
+}

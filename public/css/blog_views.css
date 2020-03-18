@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#banner {
+    width: 100%;
+    height: 300px;
+}
+
+#banner img {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    width: 900px;
+    margin: auto;
+}
+
+article {
+    line-height: 30px;
+}
+
+.wrapper .title {
+    text-align: center;
+    padding: 20px;
+}
+
+.wrapper .tools {
+    width: 200px;
+    float: right;
+    padding: 10px;
+    text-align: center;
+}
+
+.wrapper .tools .button,
+.wrapper .tools a {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.wrapper .tools button {
+    cursor: pointer;
+}

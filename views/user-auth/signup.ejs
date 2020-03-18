@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Inscription</title>
+        <%- include("../partials/head.ejs") %>
+        <link href="css/form.css" rel="stylesheet">
+        <link href="css/form_signup.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <%- include("../partials/header.ejs") %>    
+        </header>
+        <form method="POST" action="">
+
+            <% if(errorMessage){%>
+                 <div class="error-msg">
+                    <small><%=errorMessage%></small>
+                </div>
+            <%}%>
+           
+
+            <div class="form-item">
+                <input type="text" name="pseudo" value="" placeholder="Entrer votre pseudo">
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="email" value="" placeholder="Entrer votre Email" novalidate>
+            </div>
+
+            <div class="form-item">
+                <input type="password" name="password" value="" placeholder="Entrez un mot de passe">
+            </div>
+
+            <div class="form-item">
+                <input type="password" name="confirm_pass" value="" placeholder="Confirmez votre mot de passe">
+            </div>
+
+            <div class="form-item">
+                <input type="submit"  value="Inscription">
+            </div>
+        </form>
+    </body>
+</html>

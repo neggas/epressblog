@@ -1,0 +1,52 @@
+#carte-section {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 150px;
+    width: 100%;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.carte {
+    width: 300px;
+    height: 400px;
+    text-align: center;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 1px 1px 1px #ccc;
+    cursor: pointer;
+}
+
+.carte .img-zone {
+    width: 100%;
+}
+
+.carte .img-zone img {
+    width: 100%;
+}
+
+.carte .text-zone {
+    margin-top: 20px;
+}
+
+.carte .logo-zone {
+    position: relative;
+    display: flex;
+    padding: 20px;
+    top: 90px;
+}
+
+.carte .logo-zone h3 {
+    color: black;
+}
+
+.carte .logo-zone h3,
+.carte .logo-zone button {
+    margin-left: 30px;
+}

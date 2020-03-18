@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Connexion</title>
+        <%- include("../partials/head.ejs") %>
+        <link href="css/form.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <%- include("../partials/header.ejs") %>    
+        </header>
+        <form method="POST" action="">
+            <div class="form-item">
+                <input type="text" name="pseudo" value="" placeholder="Entrer votre pseudo">
+            </div>
+
+            <div class="form-item">
+                <input type="password" name="email" value="" placeholder="Entrer votre mot de passe">
+            </div>
+
+            <div class="form-item">
+                <input type="submit" value="connexion">
+            </div>
+        </form>
+    </body>
+</html>
