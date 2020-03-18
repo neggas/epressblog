@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const session = require("express-session");
+const MongoDbStore = require("connect-mongodb-session")(session);
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -11,11 +12,22 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
+const store = new MongoDbStore({
+    uri: "mongodb://localhost/blog",
+    collection: 'sessions'
+})
+
 app.use(session({
     secret: "my secret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: store
 }))
+
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    next();
+})
 
 const authRoute = require('./router/auth');
 const articleRoute = require('./router/articles');

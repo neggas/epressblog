@@ -10,12 +10,17 @@
             <%- include("../partials/header.ejs") %>    
         </header>
         <form method="POST" action="">
+            <% if(errorMessage){%>
+                <div class="error-msg">
+                    <small><%=errorMessage%></small>
+                </div>
+            <%} %>
             <div class="form-item">
-                <input type="text" name="pseudo" value="" placeholder="Entrer votre pseudo">
+                <input type="email" name="email" value="" placeholder="Entrer votre Email">
             </div>
 
             <div class="form-item">
-                <input type="password" name="email" value="" placeholder="Entrer votre mot de passe">
+                <input type="password" name="password" value="" placeholder="Entrer votre mot de passe">
             </div>
 
             <div class="form-item">

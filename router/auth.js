@@ -28,6 +28,6 @@ router.post("/inscription", [
 ], authController.postInscription);
 
 router.get("/connexion", authController.getConnexion);
-router.get("/connexion", authController.postConnexion);
+router.post("/connexion", body("email", "Entrer un mail valide").isEmail(), authController.postConnexion);
 
 module.exports = router;

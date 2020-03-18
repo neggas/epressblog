@@ -3,11 +3,54 @@ const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 
 exports.getConnexion = (req, res, next) => {
-    res.render("user-auth/login.ejs");
+
+    let message = req.flash("error");
+
+    (message.length > 0) ? message = message[0]: message = null;
+    res.render("user-auth/login.ejs", { errorMessage: message });
 }
 
-exports.postConnexion = (req, res, next) => {
+exports.postConnexion = async(req, res, next) => {
 
+    const error = validationResult(req);
+
+
+    if (!error.isEmpty()) {
+        res.render("user-auth/login", { errorMessage: error.array()[0].msg });
+    } else {
+
+        try {
+            const authData = req.body;
+            const userDoc = await User.findOne({ email: authData.email });
+
+            if (userDoc) {
+                const isSame = await bcrypt.compare(authData.password, userDoc.password);
+                if (isSame) {
+                    req.session.isLoggedIn = true;
+                    req.session.user = userDoc;
+
+                    return req.session.save(err => {
+                        console.log(err);
+
+                        res.redirect("/");
+                    })
+
+                } else {
+
+                    req.flash("error", "email ou mot de passe Invalide");
+                    res.redirect("/connexion");
+                }
+
+            } else {
+                req.flash("error", "Vous n'etes pas dans notre base donnes");
+                return res.redirect("/connexion");
+            }
+
+        } catch (error) {
+            console.log(`erreur ${error}`);
+        }
+
+    }
 
 }
 
