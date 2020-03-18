@@ -13,12 +13,14 @@ exports.postConnexion = (req, res, next) => {
 
 exports.getInscription = (req, res, next) => {
 
-    let message = '';
-    res.render("user-auth/signup.ejs", { errorMessage: message });
+    let message = req.flash('error');
+
+    (message.length > 0) ? message = message[0]: message = null;
+
+    res.render("user-auth/signup", { errorMessage: message });
 }
 
 exports.postInscription = async(req, res, next) => {
-
 
     const userData = req.body;
 

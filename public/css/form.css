@@ -34,3 +34,13 @@ form input[type="submit"] {
     text-align: center;
     cursor: pointer;
 }
+
+.error-msg {
+    border: 1px solid red;
+    background-color: rgb(235, 151, 151);
+    color: red;
+    padding: 10px;
+    font-size: 1em;
+    width: 90%;
+    align-self: center;
+}
