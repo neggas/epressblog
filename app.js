@@ -34,7 +34,7 @@ const articleRoute = require('./router/articles');
 
 app.use(flash());
 app.use(authRoute);
-app.use(articleRoute);
+app.use("/blog", articleRoute);
 
 mongoose.connect("mongodb://localhost/blog", { useNewUrlParser: true })
     .then((response) => {

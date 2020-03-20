@@ -21,7 +21,6 @@ router.post("/inscription", [
         if (value !== req.body.password) {
             throw new Error('les deux mot de passe ne corespondent pas');
         }
-
         return true;
     })
 
@@ -29,5 +28,7 @@ router.post("/inscription", [
 
 router.get("/connexion", authController.getConnexion);
 router.post("/connexion", body("email", "Entrer un mail valide").isEmail(), authController.postConnexion);
+router.get("/deconnexion", authController.getDeconnexion);
+
 
 module.exports = router;

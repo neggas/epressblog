@@ -24,6 +24,8 @@ exports.postConnexion = async(req, res, next) => {
             const userDoc = await User.findOne({ email: authData.email });
 
             if (userDoc) {
+
+
                 const isSame = await bcrypt.compare(authData.password, userDoc.password);
                 if (isSame) {
                     req.session.isLoggedIn = true;
@@ -32,7 +34,7 @@ exports.postConnexion = async(req, res, next) => {
                     return req.session.save(err => {
                         console.log(err);
 
-                        res.redirect("/");
+                        res.redirect("/blog");
                     })
 
                 } else {
@@ -101,4 +103,10 @@ exports.postInscription = async(req, res, next) => {
 
 
     }
+}
+
+exports.getDeconnexion = (req, res, next) => {
+    req.session.destroy(err => {
+        res.redirect('/blog');
+    })
 }
