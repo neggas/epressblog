@@ -13,35 +13,37 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
 const store = new MongoDbStore({
-    uri: "mongodb://localhost/blog",
-    collection: 'sessions'
-})
+  uri: "mongodb://localhost/blog",
+  collection: "sessions"
+});
 
-app.use(session({
+app.use(
+  session({
     secret: "my secret",
     resave: false,
     saveUninitialized: false,
     store: store
-}))
+  })
+);
 
 app.use((req, res, next) => {
-    res.locals.isAuthenticated = req.session.isLoggedIn;
-    next();
-})
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  next();
+});
 
-const authRoute = require('./router/auth');
-const articleRoute = require('./router/articles');
+const authRoute = require("./router/auth");
+const articleRoute = require("./router/articles");
 
 app.use(flash());
 app.use(authRoute);
 app.use("/blog", articleRoute);
 
-mongoose.connect("mongodb://localhost/blog", { useNewUrlParser: true })
-    .then((response) => {
-
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`le serveur ecoute sur le port ${PORT}`);
-        })
-    })
-    .catch(err => console.log(`erreur : ${err}`));
+mongoose
+  .connect("mongodb://localhost/blog", { useNewUrlParser: true })
+  .then(response => {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`le serveur ecoute sur le port ${PORT}`);
+    });
+  })
+  .catch(err => console.log(`erreur : ${err}`));

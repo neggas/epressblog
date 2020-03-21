@@ -12,6 +12,9 @@ exports.getConnexion = (req, res, next) => {
 
 exports.getAdmin = (req, res) => {
   let error = req.flash("errorAdmin");
+  if (req.session.Admin) {
+    res.redirect("/admin/dashboard");
+  }
   res.render("admin-auth/login", { error: error });
 };
 
@@ -103,6 +106,7 @@ exports.getDashboard = async (req, res) => {
 
 exports.postAdmin = async (req, res, next) => {
   let authAdmin = req.body;
+
   if (authAdmin.pseudo.toUpperCase() == "ADMIN") {
     let admin = await User.findOne({ pseudo: authAdmin.pseudo });
 

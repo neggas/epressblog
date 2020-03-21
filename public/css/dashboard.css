@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #dedede;
+}
+
+.left {
+    background-color: rgb(146, 146, 240);
+    width: 200px;
+}
+
+.left h1 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#avatar {
+    display: block;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin: auto;
+    background-color: #dedede;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+}
+
+#setting ul {
+    list-style: none;
+    padding: 20px;
+}
+
+#setting ul li {
+    width: 100%;
+    margin: 5px 0;
+    height: 50px;
+    padding-top: 15px;
+    padding-left: 5px;
+    font-size: 20px;
+    border-bottom: 1px solid #dedede;
+    color: white;
+}
+
+#setting ul li:hover {
+    background-color: white;
+    color: black;
+}
+
+li.active {
+    background-color: white;
+    color: black !important;
+}
+
+#setting ul li a {
+    text-decoration: none;
+    color: inherit
+}
+
+.main {
+    padding-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.main table {
+    border: 2px solid white;
+    /*border-bottom: 1px solid #ddd;*/
+    border-collapse: collapse;
+    text-align: center;
+
+}
+
+.main table th {
+    background-color: rgb(146, 146, 240);
+    height: 50px;
+}
+
+.main table th:first-child {
+    border-radius: 8px 0px 0px 0px;
+}
+
+.main table th:last-child {
+    border-radius: 0px 8px 0px 0px;
+}
+
+.main table tr:nth-child(2n+1) {
+    background-color: #f2f2f2;
+}
+
+.main table tr {
+    height: 60px;
+
+}
+
+.main table tr td {
+    padding-left: 12px;
+}
+
+.main table tr td a {
+    display: inline-block;
+    width: 90px;
+    height: 40px;
+    margin: 0 3px;
+    padding-top: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white
+}
+
+#compt {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.ps {
+    display: inline-block;
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    padding-top: 70px;
+    margin-left: 10px;
+
+}
+
+a.mod {
+    background-color: green;
+}
+
+a.del {
+    background-color: red;
+}
+
+
+/*PAGE MOD*/
+
+#mod {
+    width: 900px;
+    margin: 25px auto;
+    background-color: white;
+}
+
+#mod form {
+    width: 500px;
+    margin: 25px auto;
+    text-align: center;
+}
+
+#mod h2 {
+    margin-bottom: 25px;
+}
+
+#mod form input {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+#mod form label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#mod form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 50px;
+}
+
+#mod form input[type="submit"] {
+    border-radius: 8px;
+    height: 50px;
+    border: 1px solid #dedede;
+    background-color: green;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+
+#remove {
+    width: 600px;
+    height: 200px;
+    margin: 50px auto;
+    text-align: center;
+    background: white;
+    padding: 50px 5px;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+#remove a {
+    display: inline-block;
+    margin-top: 25px;
+    margin-left: 25px;
+    padding-top: 3px;
+    width: 75px;
+    height: 30px;
+    color: white;
+    text-decoration: none;
+}

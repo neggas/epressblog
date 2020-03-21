@@ -5,24 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 
 <body>
+    <div class="container">
+        <section class="left">
+            <div id="Account">
+                <div id="user">
 
-    <section class="left">
-        <div id="Account">
-            <div id="user">
-                <% if(locals.infoUser) {%>
-                <%= infoUser.pseudo %>
-                <% } %>
+                    <% if(locals.infoUser) {%>
+                    <h1><%= infoUser.pseudo %></h1>
+                    <% } %>
+                    <span id="avatar"></span>
+                </div>
+                <div id="setting">
+                    <ul>
+                        <li class="active"><a href="/admin/dashboard">Acceuil</a> </li>
+                        <li><a href="/admin/articles">Voir articles</a> </li>
+                        <li><a href="/admin/add">Ajouter un Article</a> </li>
+                        <li><a href="/admin/setting">Paramètre</a> </li>
+                    </ul>
+                </div>
             </div>
-            <div id="setting">
-                <ul>
-                    <li><a href="/admin/dashboard">Acceuil</a> </li>
-                    <li><a href="/admin/articles">Voir articles</a> </li>
-                    <li><a href="/admin/add">Ajouter un Article</a> </li>
-                    <li><a href="/admin/setting">Paramètre</a> </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        </section>
