@@ -1,0 +1,12 @@
+<%- include ("partials/header") %>
+<form action="/admin/add" method="post">
+    <% if(locals.error) {%>
+    <span><%=error%></span><br>
+    <% } %>
+    <label for="titre">Titre</label><br>
+    <input type="text" name="titre" id="titre" value=""><br>
+    <label for="article">Article</label><br>
+    <textarea name="article" id="article" cols="30" rows="10"></textarea><br>
+    <input type="submit" value="Modifier">
+</form>
+<%- include ("partials/footer") %>

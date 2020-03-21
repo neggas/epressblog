@@ -1,17 +1,13 @@
 exports.getArticles = (req, res) => {
-    res.render("index.ejs");
-}
+  res.render("index.ejs");
+};
 
 exports.readArticles = (req, res) => {
-    res.render("blog_views.ejs");
-}
+  res.render("blog_views.ejs");
+};
 
 exports.getCommentArticles = (req, res) => {
-    res.render("blog_comment");
-}
+  res.render("blog_comment");
+};
 
-exports.postCommentArticles = (req, res) => {
-
-
-
-}
+exports.postCommentArticles = (req, res) => {};

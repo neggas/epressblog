@@ -1,0 +1,11 @@
+<%- include ("partials/header") %>
+
+<% if(locals.artId) {%>
+<div>
+    <p>Voulez vous supprimer l'article Id <%=artId%></p>
+    <a href="/admin/remove/<%=artId%>">Oui</a>
+    <a href="/admin/dashboard">non</a>
+</div>
+<% } %>
+
+<%- include ("partials/footer") %>

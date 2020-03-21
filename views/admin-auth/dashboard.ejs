@@ -1,0 +1,31 @@
+<%- include ("partials/header") %>
+
+<div class="main">
+    <% if(locals.articles) {%>
+    <% let arts = JSON.stringify(articles) %>
+    <% let artss = JSON.parse(arts) %>
+    <table>
+        <thead>
+            <% for(let art in artss[0]) {%>
+            <th><%=art%></th>
+            <% } %>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <% for(let i = 0;i<artss.length;i++) {%>
+            <tr>
+                <% for(let ar in artss[i]) {%>
+                <% if(ar != "__v") {%>
+                <td><%= artss[i][ar]%></td>
+                <% } %>
+                <% } %>
+                <td><a href="/admin/mod/<%= artss[i]["_id"]%>">Modifier</a></td>
+                <td><a href="/admin/cfremove/<%= artss[i]["_id"]%>">Supprimer</a></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <% } %>
+</div>
+
+<%- include ("partials/footer") %>

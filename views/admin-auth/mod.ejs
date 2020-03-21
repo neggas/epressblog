@@ -1,0 +1,21 @@
+<%- include ("partials/header") %>
+<div>
+
+    <% if(locals.article) {%>
+    <% article = JSON.stringify(article);let art = JSON.parse(article); %>
+    <form action="/admin/mod/<%= art._id %>" method="post">
+        <% if(locals.error) {%>
+        <span><%= error %> </span>
+        <% } %>
+        <label for="id">_Id</label><br>
+        <input type="text" name="id" id="id" value="<%=art._id%>" disabled><br>
+        <label for="titre">Titre</label><br>
+        <input type="text" name="titre" id="titre" value="<%=art.titre%>"><br>
+        <label for="article">Article</label><br>
+        <textarea name="article" id="article" cols="30" rows="10"><%=art.article%></textarea><br>
+        <input type="submit" value="Modifier">
+    </form>
+    <% } %>
+
+</div>
+<%- include ("partials/footer") %>

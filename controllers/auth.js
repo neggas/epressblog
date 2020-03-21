@@ -1,72 +1,219 @@
 const User = require("../models/user");
+const Article = require("../models/article");
 const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 
 exports.getConnexion = (req, res, next) => {
-
     let message = req.flash("error");
 
-    (message.length > 0) ? message = message[0]: message = null;
+    message.length > 0 ? (message = message[0]) : (message = null);
     res.render("user-auth/login.ejs", { errorMessage: message });
-}
+};
+
+exports.getAdmin = (req, res) => {
+    let error = req.flash("errorAdmin");
+    res.render("admin-auth/login", { error: error });
+};
+
+exports.pageRemoveArticle = (req, res) => {
+    let artId = req.params.id;
+    res.render("admin-auth/remove", {
+        artId: artId,
+        infoUser: req.session.Admin
+    });
+};
+
+exports.removeArticle = async(req, res) => {
+    let del = await Article.deleteOne({ _id: req.params.id });
+    if (del) {
+        res.redirect("/admin/dashboard");
+    }
+};
+
+exports.getaddArticle = (req, res) => {
+    res.render("admin-auth/add", {
+        infoUser: req.session.Admin,
+        error: req.flash("errorAdd")
+    });
+};
+
+exports.postaddArticle = async(req, res) => {
+    if (req.body.titre != "" && req.body.article != "") {
+        let art = new Article({
+            titre: req.body.titre,
+            article: req.body.article,
+            comments: {}
+        });
+        let addArt = await art.save();
+        if (addArt) {
+            res.redirect("/admin/dashboard");
+        } else {
+
+
+            try {
+                const authData = req.body;
+                const userDoc = await User.findOne({ email: authData.email });
+
+                if (userDoc) {
+
+
+                    const isSame = await bcrypt.compare(authData.password, userDoc.password);
+                    if (isSame) {
+                        req.session.isLoggedIn = true;
+                        req.session.user = userDoc;
+
+                        return req.session.save(err => {
+
+                            if (err) console.log(err);
+                            res.redirect("/blog");
+                        })
+
+                    } else {
+
+                        req.flash("error", "email ou mot de passe Invalide");
+                        res.redirect("/connexion");
+                    }
+
+                } else {
+                    req.flash("error", "Vous n'etes pas dans notre base donnes");
+                    return res.redirect("/connexion");
+                }
+
+            } catch (error) {
+                console.log(`erreur ${error}`);
+            }
+
+
+            req.flash("errorAdd", "not add");
+            res.redirect("/admin/add");
+
+        }
+    } else {
+        req.flash("errorAdd", "tout les champs sont obligatoires");
+        res.redirect("/admin/add");
+    }
+};
+
+exports.postModArticle = async(req, res) => {
+    let art = req.body;
+    let modArt = await Article.updateOne({ _id: req.params.id }, { $set: { titre: art.titre, article: art.article } });
+
+    if (modArt) {
+        res.redirect("/admin/dashboard");
+    } else {
+        res.render("/admin/mod/" + req.params.id, { error: "not modified" });
+    }
+};
+
+exports.getModArticle = async(req, res, next) => {
+    try {
+        let article = await Article.findOne({ _id: req.params.id });
+        if (Article) {
+            res.render("admin-auth/mod", {
+                article: article,
+                infoUser: req.session.Admin
+            });
+        } else {
+            res.render("admin/dashboard");
+        }
+    } catch (e) {
+        console.log(e.message);
+        res.redirect("/admin/dashboard");
+    }
+};
+
+exports.getDashboard = async(req, res) => {
+    if (req.session.Admin) {
+        let allArticle = await Article.find({});
+
+        res.render("admin-auth/dashboard", {
+            infoUser: req.session.Admin,
+            articles: allArticle
+        });
+    } else {
+        res.redirect("/admin-connect");
+    }
+};
+
+exports.postAdmin = async(req, res, next) => {
+    let authAdmin = req.body;
+    if (authAdmin.pseudo.toUpperCase() == "ADMIN") {
+        let admin = await User.findOne({ pseudo: authAdmin.pseudo });
+
+        if (admin) {
+            let same = await bcrypt.compare(authAdmin.password, admin.password);
+            if (same) {
+                req.session.Admin = {
+                    pseudo: admin.pseudo,
+                    connected: true
+                };
+                res.redirect("/admin/dashboard");
+            } else {
+                req.flash("errorAdmin", "password incorrect");
+                res.redirect("/admin-connect");
+            }
+        } else {
+            let encryptedPass = await bcrypt.hash(authAdmin.password, 12);
+            let createAdmin = new User({
+                email: "admin@contact.ci",
+                password: encryptedPass,
+                pseudo: authAdmin.pseudo
+            });
+            let done = await createAdmin.save();
+            if (done) {
+                res.redirect("/admin/dashboard");
+            }
+        }
+    }
+};
 
 exports.postConnexion = async(req, res, next) => {
-
     const error = validationResult(req);
-
 
     if (!error.isEmpty()) {
         res.render("user-auth/login", { errorMessage: error.array()[0].msg });
     } else {
-
         try {
             const authData = req.body;
             const userDoc = await User.findOne({ email: authData.email });
 
             if (userDoc) {
-
-
-                const isSame = await bcrypt.compare(authData.password, userDoc.password);
+                const isSame = await bcrypt.compare(
+                    authData.password,
+                    userDoc.password
+                );
                 if (isSame) {
                     req.session.isLoggedIn = true;
                     req.session.user = userDoc;
 
                     return req.session.save(err => {
+                        console.log(err);
 
-                        if (err) console.log(err);
                         res.redirect("/blog");
-                    })
-
+                    });
                 } else {
-
                     req.flash("error", "email ou mot de passe Invalide");
                     res.redirect("/connexion");
                 }
-
             } else {
                 req.flash("error", "Vous n'etes pas dans notre base donnes");
                 return res.redirect("/connexion");
             }
-
         } catch (error) {
             console.log(`erreur ${error}`);
         }
-
     }
-
-}
+};
 
 exports.getInscription = (req, res, next) => {
+    let message = req.flash("error");
 
-    let message = req.flash('error');
-
-    (message.length > 0) ? message = message[0]: message = null;
+    message.length > 0 ? (message = message[0]) : (message = null);
 
     res.render("user-auth/signup", { errorMessage: message });
-}
+};
 
 exports.postInscription = async(req, res, next) => {
-
     const userData = req.body;
 
     const erros = validationResult(req);
@@ -74,12 +221,11 @@ exports.postInscription = async(req, res, next) => {
     if (!erros.isEmpty()) {
         res.render("user-auth/signup", { errorMessage: erros.array()[0].msg });
     } else {
-
         try {
             const userDoc = await User.find({ email: userData.email });
             if (userDoc.length > 0) {
                 req.flash("error", "l'email existe deja ");
-                return res.redirect("/inscription")
+                return res.redirect("/inscription");
             }
 
             const encryptedPass = await bcrypt.hash(userData.password, 12);
@@ -92,21 +238,16 @@ exports.postInscription = async(req, res, next) => {
             const done = await user.save();
 
             if (done) {
-                res.redirect('/connexion');
+                res.redirect("/connexion");
             }
-
         } catch (err) {
             console.log(err);
         }
-
-
-
-
     }
-}
+};
 
 exports.getDeconnexion = (req, res, next) => {
     req.session.destroy(err => {
-        res.redirect('/blog');
-    })
-}
+        res.redirect("/blog");
+    });
+};

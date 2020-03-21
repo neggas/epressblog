@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const artilceController = require("../controllers/articles");
+const articleController = require("../controllers/articles");
 
-router.get('/', artilceController.getArticles);
-router.get("/122def", artilceController.readArticles);
-router.get("/:id/comment", artilceController.getCommentArticles);
-router.post("/:/comment", artilceController.postCommentArticles);
+router.get("/", articleController.getArticles);
+router.get("/122def", articleController.readArticles);
+router.get("/:id/comment", articleController.getCommentArticles);
+router.post("/:/comment", articleController.postCommentArticles);
+
 module.exports = router;
