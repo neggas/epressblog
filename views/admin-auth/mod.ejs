@@ -1,9 +1,10 @@
 <%- include ("partials/header") %>
-<div>
+<div id="mod">
 
     <% if(locals.article) {%>
     <% article = JSON.stringify(article);let art = JSON.parse(article); %>
     <form action="/admin/mod/<%= art._id %>" method="post">
+        <h2>Modifier un article</h2>
         <% if(locals.error) {%>
         <span><%= error %> </span>
         <% } %>

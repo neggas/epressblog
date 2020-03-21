@@ -1,6 +1,16 @@
 <%- include ("partials/header") %>
 
 <div class="main">
+    <div id="compt">
+        <div class="views ps">
+            <h3>Total des likes de la page</h3>
+            <p>0 vues</p>
+        </div>
+        <div class="likes ps">
+            <h3>Total des vues de la page</h3>
+            <p>0 vues</p>
+        </div>
+    </div>
     <% if(locals.articles) {%>
     <% let arts = JSON.stringify(articles) %>
     <% let artss = JSON.parse(arts) %>
@@ -19,8 +29,9 @@
                 <td><%= artss[i][ar]%></td>
                 <% } %>
                 <% } %>
-                <td><a href="/admin/mod/<%= artss[i]["_id"]%>">Modifier</a></td>
-                <td><a href="/admin/cfremove/<%= artss[i]["_id"]%>">Supprimer</a></td>
+                <td><a href="/admin/mod/<%= artss[i]["_id"]%>" class="mod">Modifier</a><a class="del"
+                        href="/admin/cfremove/<%= artss[i]["_id"]%>">Supprimer</a>
+                </td>
             </tr>
             <% } %>
         </tbody>
