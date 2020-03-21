@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div id="form">
+        <form action="/admin-connect" method="POST">
+            <h2>CONNEXION - ADMIN</h2>
+            <% if(locals.error) {%>
+            <span style="color:red"><%= error %></span>
+            <%}%>
+            <div id="connexion">
+                <label for="pseudo">Pseudo </label>
+                <input type="text" name="pseudo" id="pseudo">
+                <label for="psd">Password</label>
+                <input type="password" name="password" id="psd">
+                <input type="submit" value="connexion" id="btn">
+            </div>
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
