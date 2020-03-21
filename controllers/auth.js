@@ -32,8 +32,8 @@ exports.postConnexion = async(req, res, next) => {
                     req.session.user = userDoc;
 
                     return req.session.save(err => {
-                        console.log(err);
 
+                        if (err) console.log(err);
                         res.redirect("/blog");
                     })
 
