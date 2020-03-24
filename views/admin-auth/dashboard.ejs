@@ -26,9 +26,13 @@
             <tr>
                 <% for(let ar in artss[i]) {%>
                 <% if(ar != "__v") {%>
+                <% if(ar == "_id") {%>
+                <td><%= artss[i][ar].slice(0,8)+"..."%></td>
+                <% }else if(ar=="article"){ %>
+                <td><%= artss[i][ar].slice(0,50)+"..."%></td>
+                <% }else{ %>
                 <td><%= artss[i][ar]%></td>
-                <% } %>
-                <% } %>
+                <% }}} %>
                 <td><a href="/admin/mod/<%= artss[i]["_id"]%>" class="mod">Modifier</a><a class="del"
                         href="/admin/cfremove/<%= artss[i]["_id"]%>">Supprimer</a>
                 </td>
