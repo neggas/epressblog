@@ -21,6 +21,7 @@ a {
     margin-right: 20px;
     box-shadow: 1px 1px 1px #ccc;
     cursor: pointer;
+    max-height: 400px;
 }
 
 .carte .img-zone {
@@ -31,15 +32,21 @@ a {
     width: 100%;
 }
 
-.carte .text-zone {
-    margin-top: 20px;
-}
-
 .carte .logo-zone {
     position: relative;
     display: flex;
     padding: 20px;
     top: 90px;
+}
+
+.texte-zone {
+    height: 100px;
+    background-color: red;
+}
+
+.carte .texte-zone .title {
+    font-size: 1.2;
+    color: orangered;
 }
 
 .carte .logo-zone h3 {

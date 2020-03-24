@@ -56,14 +56,13 @@ exports.postaddArticle = async(req, res) => {
 
                 if (userDoc) {
 
-
                     const isSame = await bcrypt.compare(authData.password, userDoc.password);
                     if (isSame) {
+
                         req.session.isLoggedIn = true;
                         req.session.user = userDoc;
 
                         return req.session.save(err => {
-
                             if (err) console.log(err);
                             res.redirect("/blog");
                         })
@@ -117,7 +116,7 @@ exports.getModArticle = async(req, res, next) => {
             res.render("admin/dashboard");
         }
     } catch (e) {
-        console.log(e.message);
+
         res.redirect("/admin/dashboard");
     }
 };
@@ -136,35 +135,47 @@ exports.getDashboard = async(req, res) => {
 };
 
 exports.postAdmin = async(req, res, next) => {
-    let authAdmin = req.body;
-    if (authAdmin.pseudo.toUpperCase() == "ADMIN") {
-        let admin = await User.findOne({ pseudo: authAdmin.pseudo });
 
-        if (admin) {
-            let same = await bcrypt.compare(authAdmin.password, admin.password);
-            if (same) {
-                req.session.Admin = {
-                    pseudo: admin.pseudo,
-                    connected: true
-                };
-                res.redirect("/admin/dashboard");
+    try {
+
+        let authAdmin = req.body;
+        if (authAdmin.pseudo.toUpperCase() == "ADMIN") {
+            let admin = await User.findOne({ pseudo: authAdmin.pseudo });
+
+            if (admin) {
+                let same = await bcrypt.compare(authAdmin.password, admin.password);
+                if (same) {
+                    req.session.Admin = {
+                        pseudo: admin.pseudo,
+                        connected: true
+                    };
+                    res.redirect("/admin/dashboard");
+                } else {
+                    req.flash("errorAdmin", "password incorrect");
+                    res.redirect("/admin-connect");
+                }
             } else {
-                req.flash("errorAdmin", "password incorrect");
-                res.redirect("/admin-connect");
-            }
-        } else {
-            let encryptedPass = await bcrypt.hash(authAdmin.password, 12);
-            let createAdmin = new User({
-                email: "admin@contact.ci",
-                password: encryptedPass,
-                pseudo: authAdmin.pseudo
-            });
-            let done = await createAdmin.save();
-            if (done) {
-                res.redirect("/admin/dashboard");
+                let encryptedPass = await bcrypt.hash(authAdmin.password, 12);
+                let createAdmin = new User({
+                    email: "admin@contact.ci",
+                    password: encryptedPass,
+                    pseudo: authAdmin.pseudo
+                });
+
+                let done = await createAdmin.save();
+                if (done) {
+                    res.redirect("/admin/dashboard");
+                }
+
+
             }
         }
+
+
+    } catch (err) {
+        console.log(err);
     }
+
 };
 
 exports.postConnexion = async(req, res, next) => {

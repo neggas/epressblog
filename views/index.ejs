@@ -12,42 +12,28 @@
 
         <section id="carte-section">
 
-            <a href="/blog/122def">
-                <div class="carte">
-                    <div class="img-zone">
-                        <img src="img/blog2.png" alt="Blog photo">
+            <% for (article of articles){%>
+
+                <a href="/blog/<%= article._id %>">
+                    <div class="carte">
+                        <div class="img-zone">
+                            <img src="img/blog2.png" alt="Blog photo">
+                        </div>
+
+                        <div class="text-zone">
+                          <h1 class="title">TRIEL APPOLON</h1>
+                        </div>
+
+                        <div class="logo-zone">
+                            <h3>11 likes</h3>
+                            <button>View</button>
+                        </div>
                     </div>
+                </a>
 
-                    <div class="text-zone">
-                        <h1>Why Javascript ?</h1>
-                    </div>
-
-                     <div class="logo-zone">
-                        <h3>11 likes</h3>
-                        <button>View</button>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/blog/1123def">
-
-                <div class="carte">
-
-                    <div class="img-zone">
-                        <img src="img/blog2.png" alt="Blog photo">
-                    </div>
-                    <div class="text-zone">
-                    <h1>Why Javascript ?</h1>
-                    </div>
-
-                    <div class="logo-zone">
-                        <h3>11 likes</h3>
-                        <button>View</button>
-                    </div>
-
-                </div>
-
-            </a>
+            <%}%>
+           
+           
 
             
         </section>
