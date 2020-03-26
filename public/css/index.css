@@ -51,3 +51,35 @@ a {
 .carte .logo-zone button {
     margin-left: 30px;
 }
+
+@media only screen and (max-width:490px) {
+    #carte-section {
+        display: block;
+        padding: 0;
+        width: 100%;
+        align-self: center;
+    }
+    .carte {
+        margin-left: 15px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    #carte-section {
+        display: block;
+        width: 100%;
+        align-self: center;
+    }
+    .carte-container {
+        margin-right: 100px;
+        display: block;
+        position: relative;
+        right: 200px;
+    }
+    .carte {
+        position: relative;
+        display: block;
+        right: 100px;
+    }
+}
