@@ -56,6 +56,9 @@ article {
     font-size: 1.3em;
     padding: 5px;
     align-self: center;
+    text-align: left;
+    line-height: 20px;
+    height: 80px;
 }
 
 .comment_form input[type="submit"] {

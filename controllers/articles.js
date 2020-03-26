@@ -18,6 +18,7 @@ exports.readArticles = async(req, res) => {
 
     try {
 
+
         const articleId = req.params.id;
         const article = await Article.findOne({ _id: articleId });
         res.render("blog_views.ejs", { article: article });
@@ -26,13 +27,18 @@ exports.readArticles = async(req, res) => {
         console.log(e);
     }
 
-
-
-
 };
 
-exports.getCommentArticles = (req, res) => {
-    res.render("blog_comment");
+exports.getCommentArticles = async(req, res) => {
+    try {
+
+        const articleId = req.params.id;
+        const article = await Article.findOne({ _id: articleId });
+        res.render("blog_comment", { article: article });
+
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 exports.postCommentArticles = (req, res) => {};

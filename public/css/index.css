@@ -41,12 +41,6 @@ a {
 
 .texte-zone {
     height: 100px;
-    background-color: red;
-}
-
-.carte .texte-zone .title {
-    font-size: 1.2;
-    color: orangered;
 }
 
 .carte .logo-zone h3 {
