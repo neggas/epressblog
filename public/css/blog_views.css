@@ -66,3 +66,23 @@ article {
     margin-top: 10px;
     margin-left: 200px;
 }
+
+@media only screen and (max-width:620px) {
+    .comment_form {
+        width: 90%;
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (max-width:900px) {
+    .wrapper {
+        width: 90%;
+        margin: auto;
+        font-size: 3vh;
+    }
+    .comment_form input[type="submit"] {
+        width: 70%;
+        position: relative;
+        right: 150px;
+    }
+}
