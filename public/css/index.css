@@ -52,34 +52,102 @@ a {
     margin-left: 30px;
 }
 
-@media only screen and (max-width:490px) {
+
+/* GESTION DE LA RESPONSIVITÉ */
+
+@media only screen and (max-width:979px) {
     #carte-section {
-        display: block;
-        padding: 0;
+        flex-wrap: nowrap;
         width: 100%;
         align-self: center;
     }
-    .carte {
-        margin-left: 15px;
-        width: 90%;
+    .carte-container {
+        flex-wrap: nowrap;
     }
 }
 
-@media only screen and (max-width:320px) {
+@media only screen and (max-width:829px) {
+    #carte-section {
+        flex-wrap: nowrap;
+        width: 100%;
+        align-self: center;
+        padding-left: 100px;
+    }
+    .carte-container {
+        flex-wrap: nowrap;
+    }
+}
+
+@media only screen and (max-width:780px) {
     #carte-section {
         display: block;
         width: 100%;
         align-self: center;
     }
     .carte-container {
-        margin-right: 100px;
         display: block;
         position: relative;
-        right: 200px;
+        left: 50px;
+    }
+}
+
+@media only screen and (max-width:560px) {
+    #carte-section {
+        display: block;
+        width: 100%;
+        align-self: center;
+    }
+    .carte-container {
+        display: block;
+        position: relative;
+        left: 50px;
     }
     .carte {
         position: relative;
         display: block;
         right: 100px;
+    }
+}
+
+@media only screen and (max-width:432px) {
+    #carte-section {
+        display: block;
+        width: 100%;
+    }
+    .carte {
+        position: relative;
+        right: 120px;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    .carte {
+        position: relative;
+        right: 120px;
+    }
+}
+
+@media only screen and (max-width:384px) {
+    .carte {
+        position: relative;
+        right: 130px;
+    }
+}
+
+@media only screen and (max-width:340px) {
+    .carte {
+        position: relative;
+        right: 160px;
+    }
+}
+
+@media only screen and (max-width:280px) {
+    .carte {
+        position: relative;
+        width: 250px;
+        height: 320px;
+    }
+    .carte .logo-zone {
+        top: 30px;
     }
 }
