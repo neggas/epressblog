@@ -21,7 +21,7 @@ exports.readArticles = async(req, res) => {
 
         const articleId = req.params.id;
         const article = await Article.findOne({ _id: articleId });
-        res.render("blog_views.ejs", { article: article });
+        res.render("blog_views.ejs", { article });
 
     } catch (e) {
         console.log(e);
@@ -41,4 +41,42 @@ exports.getCommentArticles = async(req, res) => {
     }
 };
 
-exports.postCommentArticles = (req, res) => {};
+exports.postCommentArticles = async(req, res) => {
+
+    try {
+
+        const commentaire = req.body.commentaire;
+        const date = new Date();
+
+        const time = {
+            day: date.getDay(),
+            hour: date.getHours(),
+            minutes: date.getMinutes(),
+            seconds: date.getSeconds()
+        }
+
+        if (commentaire && commentaire !== '') {
+
+            //creation d'objet commentaire
+            const commentObject = { commentaire, time, user: req.session.user.pseudo }
+
+            //on accede a un commentaire grace a son id
+            const articleId = req.params.id;
+            const article = await Article.findOne({ _id: articleId });
+
+            let currentComments = [...article.comments];
+            currentComments.push(commentObject);
+
+            await Article.findByIdAndUpdate({ _id: articleId }, { comments: currentComments });
+            return res.redirect(`/blog/${articleId}`);
+        } else {
+
+            req.flash("commetError", "Vous tentez d'envoyer un commentaire vide")
+            return res.redirect('/blog' + req.url);
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
+
+};

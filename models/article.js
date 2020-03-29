@@ -12,7 +12,7 @@ const ArticleSchema = new Schema({
         required: true
     },
     comments: {
-        type: Object,
+        type: Array,
         required: false
     }
 });

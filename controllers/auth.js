@@ -43,11 +43,13 @@ exports.getaddArticle = (req, res) => {
 
 exports.postaddArticle = async(req, res) => {
     if (req.body.titre != "" && req.body.article != "") {
+
         let art = new Article({
             titre: req.body.titre,
             article: req.body.article,
             comments: {}
         });
+
         let addArt = await art.save();
         if (addArt) {
             res.redirect("/admin/dashboard");
