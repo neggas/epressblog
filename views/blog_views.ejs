@@ -26,6 +26,27 @@
                     <button class="like">Like</button>
                     <a href="/blog/<%=article._id%>/comment"><button>comment</button></a>
                 </div>
+
+             
+
+                <% if(article.comments && article.comments.length > 0){%>
+                    <div class="comment-div">
+                        <h3>Commentaires:</h3>
+                        <% for(comment of article.comments){%>
+                            <div class="cmt">
+                                <h4 class="cmt-user"><%=comment.user%></h4>
+                                <blockquote>
+                                   <%= comment.commentaire%>
+                                </blockquote>
+                                <small>
+                                    <%=comment.time.hour%>-<%=comment.time.minutes%>-<%=comment.time.seconds%>
+                                </small>
+                            </div>
+                        <%}%>
+                       
+                    </div>
+                <%}%>
+                
             </div>
         
         </section>
