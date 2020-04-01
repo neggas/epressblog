@@ -1,14 +1,18 @@
 <%- include ("partials/header") %>
 <div class="mod">
-    <form action="/admin/add" method="post">
+    <form action="/admin/add" method="post" enctype="multipart/form-data">
         <h2>Ajouter un article</h2>
         <% if(locals.error) {%>
         <span><%=error%></span><br>
         <% } %>
         <label for="titre">Titre</label><br>
         <input type="text" name="titre" id="titre" value=""><br>
+
         <label for="article">Article</label><br>
-        <textarea name="article" id="article" cols="30" rows="10"></textarea><br>
+
+        <textarea name="article" id="article" cols="30" rows="10"></textarea>
+        <label for="fichier">Image </label>
+        <input type="file" name="fichier" id="fichier" value="Ajouter une image">
         <input type="submit" value="Ajouter">
     </form>
 </div>

@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <%-include("./partials/head.ejs") %>
-        <link href="/css/blog_views.css" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <%-include('./partials/header.ejs')%> 
-        </header>
-        <div id="banner">
-            <img src="/img/blog2.png" alt="">
+
+<head>
+    <title></title>
+    <%-include("./partials/head.ejs") %>
+    <link href="/css/blog_views.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%-include('./partials/header.ejs')%>
+    </header>
+    <div id="banner">
+        <img src="/img/blog2.png" alt="">
+    </div>
+
+    <section>
+        <div class="wrapper">
+            <article>
+                <h1 class="title"><%=article.titre%></h1>
+                <blockquote cite="lorem">
+                    <%=article.article%>
+                </blockquote>
+            </article>
+
+            <div class="tools">
+                <button class="like">Like</button>
+                <a href="/blog/<%=article._id%>/comment"><button>comment</button></a>
+            </div>
         </div>
 
-        <section>
-            <div class="wrapper">
-                <article>
-                    <h1 class="title">Why Javascript</h1>
-                    <blockquote cite="lorem">
-                        <%=article.article%>
-                    </blockquote>
-                </article>
+    </section>
 
-                <div class="tools">
-                    <button class="like">Like</button>
-                    <a href="/blog/<%=article._id%>/comment"><button>comment</button></a>
-                </div>
-            </div>
-        
-        </section>
 
-       
-    </body>
+</body>
+
 </html>

@@ -4,13 +4,21 @@
     box-sizing: border-box;
 }
 
+a {
+    font-size: 18px;
+}
+
 body {
     background-color: #dedede;
 }
 
+
+
 .left {
+    position: fixed;
     background-color: rgb(146, 146, 240);
-    width: 220px;
+    width: 250px;
+    height: 100%;
 }
 
 .left h1 {
@@ -68,6 +76,7 @@ li.active {
     padding-top: 20px;
     padding-left: 5px;
     padding-right: 5px;
+    margin-left: 250px;
 }
 
 .main table {
@@ -98,7 +107,6 @@ li.active {
 
 .main table tr {
     height: 60px;
-
 }
 
 .main table tr td {
@@ -110,11 +118,12 @@ li.active {
     width: 80px;
     height: 40px;
     margin: 0 3px;
-    padding-top: 10px;
+    padding-top: 12px;
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
-    color: white
+    color: white;
+    font-size: 12px;
 }
 
 #compt {
@@ -125,7 +134,7 @@ li.active {
 
 .ps {
     display: inline-block;
-    width: 500px;
+    width: 46%;
     height: 200px;
     border-radius: 10px;
     background-color: white;
@@ -143,18 +152,23 @@ a.del {
     background-color: red;
 }
 
+a.view {
+    background-color: rgb(120, 120, 251)
+}
+
 
 /*PAGE MOD*/
 
 .mod {
     width: 900px;
-    margin: 25px auto;
+    margin: 25px 250px 0px 350px;
     background-color: white;
 }
 
 .mod form {
     width: 500px;
     margin: 25px auto;
+    padding: 15px;
     text-align: center;
 }
 
@@ -179,7 +193,7 @@ a.del {
 .mod form textarea {
     width: 100%;
     padding: 8px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 .mod form input[type="submit"] {
@@ -213,4 +227,10 @@ a.del {
     height: 30px;
     color: white;
     text-decoration: none;
+}
+
+/*fichier**/
+
+input#fichier {
+    margin-top: -10px;
 }
