@@ -33,15 +33,22 @@
                     <div class="comment-div">
                         <h3>Commentaires:</h3>
                         <% for(comment of article.comments){%>
-                            <div class="cmt">
+
+                            <% if(comment.time) {%>
+                                 <div class="cmt">
                                 <h4 class="cmt-user"><%=comment.user%></h4>
                                 <blockquote>
                                    <%= comment.commentaire%>
                                 </blockquote>
-                                <small>
+                                <% if(comment.time) {%>
+                                    <small>
                                     <%=comment.time.hour%>-<%=comment.time.minutes%>-<%=comment.time.seconds%>
-                                </small>
+                                    </small>
+                                <%}%>
+                               
                             </div>
+                            <%}%>
+                           
                         <%}%>
                        
                     </div>
