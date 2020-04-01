@@ -17,7 +17,9 @@
                 <a href="/blog/<%= article._id %>" class="carte-container">
                     <div class="carte">
                         <div class="img-zone">
-                            <img src="img/blog2.png" alt="Blog photo">
+                            <%if(article.image){%>
+                                <img src="/img/<%=article.image%>" alt="Blog photo">
+                            <%}%>
                         </div>
 
                         <div class="text-zone">
