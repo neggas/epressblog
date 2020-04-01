@@ -80,5 +80,5 @@ router.post(
   upload.single("fichier"),
   authController.postaddArticle
 );
-
+router.get("/admin/deconnect", authController.getAdminDeconnexion);
 module.exports = router;

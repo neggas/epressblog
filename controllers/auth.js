@@ -20,6 +20,7 @@ exports.getAdmin = (req, res) => {
 };
 
 exports.pageRemoveArticle = (req, res) => {
+  AdminConnect(req, res);
   let artId = req.params.id;
   res.render("admin-auth/remove", {
     artId: artId,
@@ -28,6 +29,7 @@ exports.pageRemoveArticle = (req, res) => {
 };
 
 exports.removeArticle = async (req, res) => {
+  AdminConnect(req, res);
   let del = await Article.deleteOne({ _id: req.params.id });
   if (del) {
     res.redirect("/admin/dashboard");
@@ -35,6 +37,7 @@ exports.removeArticle = async (req, res) => {
 };
 
 exports.getaddArticle = (req, res) => {
+  AdminConnect(req, res);
   res.render("admin-auth/add", {
     infoUser: req.session.Admin,
     error: req.flash("errorAdd")
@@ -42,6 +45,7 @@ exports.getaddArticle = (req, res) => {
 };
 
 exports.postaddArticle = async (req, res) => {
+  AdminConnect(req, res);
   if (req.body.titre != "" && req.body.article != "") {
     if (req.file != undefined) {
       let art = new Article({
@@ -69,6 +73,7 @@ exports.postaddArticle = async (req, res) => {
 };
 
 exports.postModArticle = async (req, res) => {
+  AdminConnect(req, res);
   let art = req.body;
   let modArt = await Article.updateOne(
     { _id: req.params.id },
@@ -83,6 +88,7 @@ exports.postModArticle = async (req, res) => {
 };
 
 exports.getModArticle = async (req, res, next) => {
+  AdminConnect(req, res);
   try {
     let article = await Article.findOne({ _id: req.params.id });
     if (Article) {
@@ -99,49 +105,56 @@ exports.getModArticle = async (req, res, next) => {
 };
 
 exports.getDashboard = async (req, res) => {
-  if (req.session.Admin) {
-    let allArticle = await Article.find({});
+  AdminConnect(req, res);
+  let allArticle = await Article.find({});
+  res.render("admin-auth/dashboard", {
+    infoUser: req.session.Admin,
+    articles: allArticle
+  });
+};
 
-    res.render("admin-auth/dashboard", {
-      infoUser: req.session.Admin,
-      articles: allArticle
-    });
-  } else {
-    res.redirect("/admin-connect");
-  }
+exports.getAdminDeconnexion = (req, res) => {
+  req.session.Admin = undefined;
+  res.redirect("/admin-connect");
 };
 
 exports.postAdmin = async (req, res, next) => {
   try {
     let authAdmin = req.body;
-    if (authAdmin.pseudo.toUpperCase() == "ADMIN") {
-      let admin = await User.findOne({ pseudo: authAdmin.pseudo });
 
-      if (admin) {
-        let same = await bcrypt.compare(authAdmin.password, admin.password);
-        if (same) {
-          req.session.Admin = {
-            pseudo: admin.pseudo,
-            connected: true
-          };
-          res.redirect("/admin/dashboard");
+    if (authAdmin.pseudo && authAdmin.password) {
+      if (authAdmin.pseudo.toUpperCase() == "ADMIN") {
+        let admin = await User.findOne({ pseudo: authAdmin.pseudo });
+
+        if (admin) {
+          let same = await bcrypt.compare(authAdmin.password, admin.password);
+          if (same) {
+            req.session.Admin = {
+              pseudo: admin.pseudo,
+              connected: true
+            };
+            res.redirect("/admin/dashboard");
+          } else {
+            req.flash("errorAdmin", "password incorrect");
+            res.redirect("/admin-connect");
+          }
         } else {
-          req.flash("errorAdmin", "password incorrect");
-          res.redirect("/admin-connect");
-        }
-      } else {
-        let encryptedPass = await bcrypt.hash(authAdmin.password, 12);
-        let createAdmin = new User({
-          email: "admin@contact.ci",
-          password: encryptedPass,
-          pseudo: authAdmin.pseudo
-        });
+          let encryptedPass = await bcrypt.hash(authAdmin.password, 12);
+          let createAdmin = new User({
+            email: "admin@contact.ci",
+            password: encryptedPass,
+            pseudo: authAdmin.pseudo
+          });
 
-        let done = await createAdmin.save();
-        if (done) {
-          res.redirect("/admin/dashboard");
+          let done = await createAdmin.save();
+          if (done) {
+            res.redirect("/admin/dashboard");
+          }
         }
       }
+    } else {
+      req.flash("errorAdmin", "veuillez remplir les champs");
+      res.redirect("/admin-connect");
     }
   } catch (err) {
     console.log(err);
@@ -232,3 +245,9 @@ exports.getDeconnexion = (req, res, next) => {
     res.redirect("/blog");
   });
 };
+
+function AdminConnect(req, res) {
+  if (!req.session.Admin) {
+    res.redirect("/admin-connect");
+  }
+}
