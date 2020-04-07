@@ -24,11 +24,10 @@
 
                         <div class="text-zone">
                           <h1 class="title" style="color:black"><%=article.titre.slice(0,20)+"..."%></h1>
-                        </div>
-
-                        <div class="logo-zone">
-                            <h3>11 likes</h3>
-                            <button>View</button>
+                          <blockquote class="extrait">
+                              <%=article.article.substring(0,article.article.indexOf('.')+1)%>
+                              <h5 class="indice">Cliquer pour lire la suite</h5>
+                          </blockquote>
                         </div>
                     </div>
                 </a>
