@@ -49,10 +49,10 @@ exports.postCommentArticles = async(req, res) => {
         const date = new Date();
 
         const time = {
+            month: date.getMonth(),
             day: date.getDay(),
-            hour: date.getHours(),
-            minutes: date.getMinutes(),
-            seconds: date.getSeconds()
+            year: date.getUTCFullYear()
+
         }
 
         if (commentaire && commentaire !== '') {
