@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const mongoConnect = require("./utils/database");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const session = require("express-session");
@@ -37,13 +38,19 @@ const articleRoute = require("./router/articles");
 app.use(flash());
 app.use(authRoute);
 app.use("/blog", articleRoute);
+const PORT = process.env.PORT || 3000;
+// mongoose
+//     .connect("mongodb://localhost/blog", { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
+//     .then(response => {
+//         const PORT = process.env.PORT || 3000;
+//         app.listen(PORT, () => {
+//             console.log(`le serveur ecoute sur le port ${PORT}`);
+//         });
+//     })
+//     .catch(err => console.log(`erreur : ${err}`));
 
-mongoose
-    .connect("mongodb://localhost/blog", { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
-    .then(response => {
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`le serveur ecoute sur le port ${PORT}`);
-        });
+mongoConnect((client) => {
+    app.listen(PORT, () => {
+        console.log(`le serveur ecoute sur le port ${PORT}`)
     })
-    .catch(err => console.log(`erreur : ${err}`));
+})
