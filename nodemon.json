@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER": "Arsene",
+        "MONGO_PASS": "nVBETDaXtkAhKRvK",
+        "MONGO_DEFAULT_DATABASE": "blog"
+    }
+}
