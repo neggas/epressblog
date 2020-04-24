@@ -68,11 +68,11 @@ exports.postCommentArticles = async(req, res) => {
             currentComments.push(commentObject);
 
             await Article.findByIdAndUpdate({ _id: articleId }, { comments: currentComments });
-            return res.redirect(`/blog/${articleId}`);
+            return res.redirect(`/${articleId}`);
         } else {
 
             req.flash("commetError", "Vous tentez d'envoyer un commentaire vide")
-            return res.redirect('/blog' + req.url);
+            return res.redirect('/' + req.url);
         }
 
     } catch (err) {

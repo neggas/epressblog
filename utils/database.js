@@ -7,9 +7,7 @@ const mongoConnect = (callback) => {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true,
-            keepAlive: true,
             reconnectTries: Number.MAX_VALUE,
-            useMongoClient: true
         })
         .then((result) => {
             callback(result)

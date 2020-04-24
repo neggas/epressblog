@@ -42,7 +42,7 @@ const articleRoute = require("./router/articles");
 const logStream = fs.createWriteStream(path.join(__dirname, 'accessLog'), { flags: 'a' });
 app.use(flash());
 app.use(authRoute);
-app.use("/blog", articleRoute);
+app.use(articleRoute);
 app.use(compression());
 app.use(helmet());
 app.use(morgan("combined", { stream: logStream }));

@@ -180,7 +180,7 @@ exports.postConnexion = async(req, res, next) => {
                     return req.session.save(err => {
                         console.log(err);
 
-                        res.redirect("/blog");
+                        res.redirect("/");
                     });
                 } else {
                     req.flash("error", "email ou mot de passe Invalide");
@@ -239,7 +239,7 @@ exports.postInscription = async(req, res, next) => {
 
 exports.getDeconnexion = (req, res, next) => {
     req.session.destroy(err => {
-        res.redirect("/blog");
+        res.redirect("/");
     });
 };
 
